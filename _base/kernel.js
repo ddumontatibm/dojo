@@ -107,7 +107,7 @@ define(["../has", "./config", "require", "module"], function(has, config, requir
 	has.add("extend-dojo", 1);
 
 
-	(Function("d", "d.eval = function(){return d.global.eval ? d.global.eval(arguments[0]) : eval(arguments[0]);}"))(dojo);
+	dojo.eval = function() { throw new Error("Don't be eval.") };
 	/*=====
 	dojo.eval = function(scriptText){
 		// summary:

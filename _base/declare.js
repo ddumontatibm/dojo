@@ -3,7 +3,7 @@ define(["./kernel", "../has", "./lang"], function(dojo, has, lang){
 	//		dojo/_base/declare
 
 	var mix = lang.mixin, op = Object.prototype, opts = op.toString,
-		xtor = new Function, counter = 0, cname = "constructor";
+		xtor = function(){}, counter = 0, cname = "constructor";
 
 	function err(msg, cls){ throw new Error("declare" + (cls ? " " + cls : "") + ": " + msg); }
 

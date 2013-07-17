@@ -310,13 +310,13 @@
 	//
 	// loader eval
 	//
-	var eval_ =
-		// use the function constructor so our eval is scoped close to (but not in) in the global space with minimal pollution
-		new Function('return eval(arguments[0]);');
-
 	req.eval =
 		function(text, hint){
-			return eval_(text + "\r\n////@ sourceURL=" + hint);
+      try {
+        throw new Error("Don't be eval.");
+      } catch (e) {
+        console.error(e.message, e, text, hint);
+      }
 		};
 
 	//
@@ -655,7 +655,7 @@
 
 				// sniff configuration on attribute in script element
 				if((src = (script.getAttribute("data-dojo-config") || script.getAttribute("djConfig")))){
-					dojoSniffConfig = req.eval("({ " + src + " })", "data-dojo-config");
+					dojoSniffConfig = JSON.parse('{' + src + '}');
 
 					// remember an insertPointSibling
 					insertPointSibling = script;
